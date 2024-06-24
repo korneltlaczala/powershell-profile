@@ -122,7 +122,6 @@ function Update-Profile {
     try {
         Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
         . $PROFILE
-        how-to-blow-a-function
         Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
     } catch {
         Write-Error "Failed to reload the profile. Error: $_"
