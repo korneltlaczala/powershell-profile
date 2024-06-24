@@ -36,18 +36,22 @@ function Test-GitHubConnection {
 
 function Get-LatestCommitHash {
     param (
-        [string]$repo = "korneltlaczala/powershell-profile",
+        [string]$user = "korneltlaczala",
+        [string]$repo = "powershell-profile",
         [string]$branch = "dev"
     )
 
-    $apiUrl = "https://api.github.com/repos/$repo/commits/$branch"
+    $url = "https://github.com/$user/$repo/commits/$branch"
     $headers = @{
         "User-Agent" = "PowerShell"
         "Cache-Control" = "no-cache"
         "Pragma" = "no-cache"
     }
-    $commitInfo = Invoke-RestMethod -Uri $apiUrl -Headers $headers
-    return $commitInfo.sha
+    $html = Invoke-WebRequest -Uri $url -Headers $headers -UseBasicParsing
+    $commits = $html.links | Where-Object {$_.href -like "*/korneltlaczala/powershell-profile/commit/*"}
+    $topCommit = $commits[0]
+    $commitHash = $topCommit.href | Split-Path -Leaf
+    return $commitHash
 }
 
 # Import Modules and External Profiles
