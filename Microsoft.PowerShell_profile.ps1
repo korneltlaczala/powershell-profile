@@ -34,6 +34,17 @@ function Test-GitHubConnection {
     return Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
 }
 
+function Get-LatestCommitHash {
+    param (
+        [string]$repo = "korneltlaczala/powershell-profile",
+        [string]$branch = "dev"
+    )
+
+    $apiUrl = "https://api.github.com/repos/$repo/commits/$branch"
+    $commitInfo = Invoke-RestMethod -Uri $apiUrl -Headers @{"User-Agent"="PowerShell"}
+    return $commitInfo.sha
+}
+
 # Import Modules and External Profiles
 # Ensure Terminal-Icons module is installed before importing
 if (-not (Get-Module -ListAvailable -Name Terminal-Icons)) {
