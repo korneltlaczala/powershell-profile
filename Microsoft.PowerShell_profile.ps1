@@ -177,14 +177,15 @@ function Test-CommandExists {
 }
 
 # Editor Configuration
-$EDITOR = if (Test-CommandExists nvim) { 'nvim' }
-          elseif (Test-CommandExists pvim) { 'pvim' }
-          elseif (Test-CommandExists vim) { 'vim' }
-          elseif (Test-CommandExists vi) { 'vi' }
-          elseif (Test-CommandExists code) { 'code' }
-          elseif (Test-CommandExists notepad++) { 'notepad++' }
-          elseif (Test-CommandExists sublime_text) { 'sublime_text' }
-          else { 'notepad' }
+
+$EDITOR = if (Test-CommandExists nvim) { 'nvim'; Write-Hoste "nvim"}
+          elseif (Test-CommandExists pvim) { 'pvim'; Write-Host "pvim"}
+          elseif (Test-CommandExists vim) { 'vim'; Write-Host "vim" }
+          elseif (Test-CommandExists vi) { 'vi'; Write-Host "vi" }
+          elseif (Test-CommandExists code) { 'code'; Write-Host "code" }
+          elseif (Test-CommandExists notepad++) { 'notepad++'; Write-Host "notepad++" }
+          elseif (Test-CommandExists sublime_text) { 'sublime_text'; Write-Host "sublime_text" }
+          else { 'notepad'; Write-Host "notepad"}
 Set-Alias -Name vim -Value $EDITOR
 
 # function Edit-Profile {
