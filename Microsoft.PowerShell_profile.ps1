@@ -121,11 +121,14 @@ function Update-Profile {
 
     try {
         Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
+        New-Item -Path $profilePath -Name "__no__update.info" -ItemType File -Force
         . $PROFILE
         Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
     } catch {
         Write-Error "Failed to reload the profile. Error: $_"
         Write-Host "Please restart your shell" -ForegroundColor $failureColor
+    } finally {
+        Remove-Item "$profilePath\__no__update.info" -ErrorAction SilentlyContinue
     }
 }
 
@@ -158,8 +161,10 @@ function Update-PowerShell {
     }
 }
 
-Update-Profile -NoReload
-Update-PowerShell
+if (!Test-Path -Path "$profilePath\__no__update.info") {
+    Update-Profile
+    Update-PowerShell
+}
 
 # # Admin Check and Prompt Customization
 # $isAdmin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
