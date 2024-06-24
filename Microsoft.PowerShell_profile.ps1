@@ -84,6 +84,7 @@ function Update-Profile {
         return
     }
 
+    $profileUpdated = $false
     try {
         Write-Host "Checking for profile updates..." -ForegroundColor $fetchColor
 
@@ -98,16 +99,22 @@ function Update-Profile {
             Write-host "Updating profile..." -ForegroundColor $updateColor
             Copy-Item -Path "$env:temp/Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
             Write-Host "Profile has been updated." -ForegroundColor $finishedColor
+            $profileUpdated = $true
         }
         else {
             Write-Host "Your profile is up to date." -ForegroundColor $successColor
         }
     } catch {
         Write-Error "Unable to check for `$profile updates"
+        return
     } finally {
         Remove-Item "$env:temp/Microsoft.PowerShell_profile.ps1" -ErrorAction SilentlyContinue
     }
 
+    if ($profileUpdated -eq $false) {
+        return
+    }
+    
     try {
         if ($NoReload) {
             Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
