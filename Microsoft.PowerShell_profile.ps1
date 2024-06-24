@@ -98,14 +98,6 @@ function Update-Profile {
             Write-host "Updating profile..." -ForegroundColor $updateColor
             Copy-Item -Path "$env:temp/Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
             Write-Host "Profile has been updated." -ForegroundColor $finishedColor
-            if ($NoReload) {
-                Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
-            }
-            else {
-                Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
-                . $PROFILE
-                Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $finishedColor
-            }
         }
         else {
             Write-Host "Your profile is up to date." -ForegroundColor $successColor
@@ -114,6 +106,21 @@ function Update-Profile {
         Write-Error "Unable to check for `$profile updates"
     } finally {
         Remove-Item "$env:temp/Microsoft.PowerShell_profile.ps1" -ErrorAction SilentlyContinue
+    }
+
+    try {
+        if ($NoReload) {
+            Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
+        }
+        else {
+            Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
+            . $PROFILE
+            how-to-blow-a-function
+            Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
+        }
+    } catch {
+        Write-Error "Failed to reload the profile. Error: $_"
+        Write-Host "Please restart your shell" -ForegroundColor $failureColor
     }
 }
 
