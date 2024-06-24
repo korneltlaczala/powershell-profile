@@ -103,7 +103,7 @@ function Update-Profile {
             }
             else {
                 Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
-                # . $PROFILE
+                . $PROFILE
                 Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $finishedColor
             }
         }
