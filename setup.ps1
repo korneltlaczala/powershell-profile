@@ -1,5 +1,5 @@
 $informationColor = "Cyan"
-$successColor = "Green"
+$successColor = "Magenta"
 
 # Ensure the script can run with elevated privileges
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
