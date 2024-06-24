@@ -41,7 +41,13 @@ function Get-LatestCommitHash {
     )
 
     $apiUrl = "https://api.github.com/repos/$repo/commits/$branch"
-    $commitInfo = Invoke-RestMethod -Uri $apiUrl -Headers @{"User-Agent"="PowerShell"}
+    $headers = @{
+        "User-Agent" = "PowerShell"
+        "Cache-Control" = "no-cache"
+        "Pragma" = "no-cache"
+        "If-Modified-Since" = [DateTime]::UtcNow.ToString('R')
+    }
+    $commitInfo = Invoke-RestMethod -Uri $apiUrl -Headers $headers
     return $commitInfo.sha
 }
 
