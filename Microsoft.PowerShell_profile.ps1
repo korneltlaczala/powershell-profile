@@ -74,6 +74,11 @@ if (Test-Path($ChocolateyProfile)) {
 
 # Check for Profile Updates
 function Update-Profile {
+
+    param (
+        [switch]$NoReload
+    )
+
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping profile update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
         return
@@ -101,6 +106,10 @@ function Update-Profile {
         Write-Error "Unable to check for `$profile updates"
     } finally {
         Remove-Item "$env:temp/Microsoft.PowerShell_profile.ps1" -ErrorAction SilentlyContinue
+        if (-not $NoReload) {
+            # . $PROFILE
+            Write-Host "Profile reloaded." -ForegroundColor $finishedColor
+        }
     }
 }
 
@@ -133,7 +142,7 @@ function Update-PowerShell {
     }
 }
 
-Update-Profile
+Update-Profile -NoReload
 Update-PowerShell
 
 # # Admin Check and Prompt Customization
