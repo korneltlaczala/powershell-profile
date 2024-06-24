@@ -161,7 +161,7 @@ function Update-PowerShell {
     }
 }
 
-if (!Test-Path -Path "$profilePath\__no__update.info") {
+if (-not (Test-Path -Path "$profilePath\__no__update.info")) {
     Update-Profile
     Update-PowerShell
 }
