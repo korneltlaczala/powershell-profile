@@ -61,7 +61,7 @@ function Update-Profile {
         Write-Host "Checking for profile updates..." -ForegroundColor $fetchColor
         $url = "https://raw.githubusercontent.com/korneltlaczala/powershell-profile/dev/Microsoft.PowerShell_profile.ps1"
         $oldhash = Get-FileHash $PROFILE
-        Invoke-RestMethod $url -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
+        Invoke-RestMethod -Uri $url -Headers @{"Cache-Control"="no-cache"} -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
         $newhash = Get-FileHash "$env:temp/Microsoft.PowerShell_profile.ps1"
         if ($newhash.Hash -ne $oldhash.Hash) {
             Write-host "Updating profile..." -ForegroundColor $updateColor
