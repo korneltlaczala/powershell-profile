@@ -60,6 +60,7 @@ try {
         Remove-Item -Path ".\CascadiaCode" -Recurse -Force
         Remove-Item -Path ".\CascadiaCode.zip" -Force
     }
+    Write-Host "Fonts ready." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to download or install the Cascadia Code font. Error: $_"
@@ -143,7 +144,7 @@ else {
 
 # Final check and message to the user
 if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "CaskaydiaCove NF")) {
-    Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes." -ForegroundColor Magenta
+    Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes." -ForegroundColor Green
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."
 }
