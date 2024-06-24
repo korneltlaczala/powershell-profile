@@ -121,7 +121,7 @@ function Update-Profile {
 
     try {
         Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
-        New-Item -Path $profilePath -Name "__just__a__reload.info" -ItemType File -Force
+        New-Item -Path $profilePath -Name "__just__a__reload.info" -ItemType File -Force | Out-Null
         . $PROFILE
         Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
     } catch {
