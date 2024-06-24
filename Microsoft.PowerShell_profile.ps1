@@ -121,14 +121,14 @@ function Update-Profile {
 
     try {
         Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
-        New-Item -Path $profilePath -Name "__no__update.info" -ItemType File -Force
+        New-Item -Path $profilePath -Name "__just__a__reload.info" -ItemType File -Force
         . $PROFILE
         Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
     } catch {
         Write-Error "Failed to reload the profile. Error: $_"
         Write-Host "Please restart your shell" -ForegroundColor $failureColor
     } finally {
-        Remove-Item "$profilePath\__no__update.info" -ErrorAction SilentlyContinue
+        Remove-Item "$profilePath\__just__a__reload.info" -ErrorAction SilentlyContinue
     }
 }
 
@@ -159,11 +159,6 @@ function Update-PowerShell {
     } catch {
         Write-Error "Failed to update PowerShell. Error: $_"
     }
-}
-
-if (-not (Test-Path -Path "$profilePath\__no__update.info")) {
-    Update-Profile
-    Update-PowerShell
 }
 
 # # Admin Check and Prompt Customization
@@ -489,4 +484,12 @@ pst - Retrieves text from the clipboard.
 Use 'Show-Help' to display this help message.
 "@
 }
+
+$is_a_reload = Test-Path -Path "$profilePath\__just__a__reload.info"
+if ($is_a_reload) {
+    return
+}
+
+Update-Profile
+Update-PowerShell
 Write-Host "Use 'Show-Help' to display help"
