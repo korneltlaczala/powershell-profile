@@ -64,7 +64,7 @@ else {
 try {
     Write-Host "Installing Oh My Posh..." -ForegroundColor $informationColor
     winget install -h -e --accept-source-agreements --accept-package-agreements JanDeDobbeleer.OhMyPosh
-    write-host "Oh My Posh installed." -ForegroundColor $successColor
+    write-host "Oh My Posh ready." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install Oh My Posh. Error: $_"
@@ -111,7 +111,7 @@ if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fo
 try {
     Write-Host "Installing Chocolatey..." -ForegroundColor $informationColor
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-    Write-Host "Chocolatey installed." -ForegroundColor $successColor
+    Write-Host "Chocolatey ready." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install Chocolatey. Error: $_"
@@ -121,7 +121,7 @@ catch {
 try {
     Write-Host "Installing Terminal Icons module..." -ForegroundColor $informationColor
     Install-Module -Name Terminal-Icons -Repository PSGallery -Force
-    Write-Host "Terminal Icons module installed." -ForegroundColor $successColor
+    Write-Host "Terminal Icons module ready." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install Terminal Icons module. Error: $_"
@@ -129,8 +129,8 @@ catch {
 # zoxide Install
 try {
     Write-Host "Installing zoxide..." -ForegroundColor $informationColor
-    winget install -h -e --id ajeetdsouza.zoxide
-    Write-Host "zoxide installed." -ForegroundColor $successColor
+    winget install -e --id ajeetdsouza.zoxide
+    Write-Host "zoxide ready." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install zoxide. Error: $_"
@@ -138,8 +138,8 @@ catch {
 # zfz Install for zoxide completions
 try {
     Write-Host "Installing fzf..." -ForegroundColor $informationColor
-    winget install -h fzf
-    Write-Host "fzf installed." -ForegroundColor $successColor
+    winget install fzf
+    Write-Host "fzf ready." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install zfz. Error: $_"
