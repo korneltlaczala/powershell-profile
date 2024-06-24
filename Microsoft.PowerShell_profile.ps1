@@ -30,7 +30,14 @@ $canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds
 # Import Modules and External Profiles
 # Ensure Terminal-Icons module is installed before importing
 if (-not (Get-Module -ListAvailable -Name Terminal-Icons)) {
-    Install-Module -Name Terminal-Icons -Scope CurrentUser -Force -SkipPublisherCheck
+    try {
+        Write-Host "Installing Terminal Icons module..." -ForegroundColor $installColor
+        Install-Module -Name Terminal-Icons -Scope CurrentUser -Repository PSGallery -Force
+        Write-Host "Terminal Icons module ready." -ForegroundColor $successColor
+    }
+    catch {
+        Write-Error "Failed to install Terminal Icons module. Error: $_"
+    }
 }
 Import-Module -Name Terminal-Icons
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
