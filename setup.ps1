@@ -1,4 +1,4 @@
-$informationColor = "Yellow"
+$informationColor = "Cyan"
 $successColor = "Green"
 
 # Ensure the script can run with elevated privileges
