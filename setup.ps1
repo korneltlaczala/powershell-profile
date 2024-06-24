@@ -1,3 +1,6 @@
+$informationColor = "Yellow"
+$successColor = "Green"
+
 # Ensure the script can run with elevated privileges
 if (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
     Write-Warning "Please run this script as an Administrator!"
@@ -59,7 +62,9 @@ else {
 
 # OMP Install
 try {
+    Write-Host "Installing Oh My Posh..." -ForegroundColor $informationColor
     winget install -e --accept-source-agreements --accept-package-agreements JanDeDobbeleer.OhMyPosh
+    write-host "Oh My Posh installed successfully." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install Oh My Posh. Error: $_"
@@ -67,6 +72,7 @@ catch {
 
 # Font Install
 try {
+    Write-Host "Installing fonts" -ForegroundColor $informationColor
     [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing")
     $fontFamilies = (New-Object System.Drawing.Text.InstalledFontCollection).Families.Name
 
@@ -96,14 +102,16 @@ catch {
 
 # Final check and message to the user
 if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "CaskaydiaCove NF")) {
-    Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes."
+    Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes." -ForegroundColor Magenta
 } else {
     Write-Warning "Setup completed with errors. Please check the error messages above."
 }
 
 # Choco install
 try {
+    Write-Host "Installing Chocolatey..." -ForegroundColor $informationColor
     Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+    Write-Host "Chocolatey installed successfully." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install Chocolatey. Error: $_"
@@ -111,23 +119,27 @@ catch {
 
 # Terminal Icons Install
 try {
+    Write-Host "Installing Terminal Icons module..." -ForegroundColor $informationColor
     Install-Module -Name Terminal-Icons -Repository PSGallery -Force
+    Write-Host "Terminal Icons module installed successfully." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install Terminal Icons module. Error: $_"
 }
 # zoxide Install
 try {
+    Write-Host "Installing zoxide..." -ForegroundColor $informationColor
     winget install -e --id ajeetdsouza.zoxide
-    Write-Host "zoxide installed successfully."
+    Write-Host "zoxide installed successfully." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install zoxide. Error: $_"
 }
 # zfz Install for zoxide completions
 try {
+    Write-Host "Installing zfz..." -ForegroundColor $informationColor
     winget install zfz
-    Write-Host "zfz installed successfully."
+    Write-Host "zfz installed successfully." -ForegroundColor $successColor
 }
 catch {
     Write-Error "Failed to install zfz. Error: $_"
