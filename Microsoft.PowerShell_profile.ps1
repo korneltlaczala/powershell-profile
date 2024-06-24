@@ -16,6 +16,14 @@
 ############                                                                                                         ############
 #################################################################################################################################
 
+# Color variables
+$fetchColor = "Cyan"
+$updateColor = "DarkYellow"
+$installColor = "DarkYellow"
+$finishedColor = "Magenta"
+$successColor = "Green"
+$failureColor = "Red"
+
 # Initial GitHub.com connectivity check with 1 second timeout
 $canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
 
@@ -38,18 +46,18 @@ function Update-Profile {
     }
 
     try {
-        Write-Host "Checking for profile updates..." -ForegroundColor Cyan
+        Write-Host "Checking for profile updates..." -ForegroundColor $fetchColor
         $url = "https://raw.githubusercontent.com/korneltlaczala/powershell-profile/dev/Microsoft.PowerShell_profile.ps1"
         $oldhash = Get-FileHash $PROFILE
         Invoke-RestMethod $url -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
         $newhash = Get-FileHash "$env:temp/Microsoft.PowerShell_profile.ps1"
         if ($newhash.Hash -ne $oldhash.Hash) {
-            Write-host "Updating profile..." -ForegroundColor Yellow
+            Write-host "Updating profile..." -ForegroundColor $updateColor
             Copy-Item -Path "$env:temp/Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
-            Write-Host "Profile has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
+            Write-Host "Profile has been updated. Please restart your shell to reflect changes" -ForegroundColor $finishedColor
         }
         else {
-            Write-Host "Your profile is up to date." -ForegroundColor Green
+            Write-Host "Your profile is up to date." -ForegroundColor $successColor
         }
     } catch {
         Write-Error "Unable to check for `$profile updates"
@@ -65,7 +73,7 @@ function Update-PowerShell {
     }
 
     try {
-        Write-Host "Checking for PowerShell updates..." -ForegroundColor Cyan
+        Write-Host "Checking for PowerShell updates..." -ForegroundColor $fetchColor
         $updateNeeded = $false
         $currentVersion = $PSVersionTable.PSVersion.ToString()
         $gitHubApiUrl = "https://api.github.com/repos/PowerShell/PowerShell/releases/latest"
@@ -76,11 +84,11 @@ function Update-PowerShell {
         }
 
         if ($updateNeeded) {
-            Write-Host "Updating PowerShell..." -ForegroundColor Yellow
+            Write-Host "Updating PowerShell..." -ForegroundColor $updateColor
             winget upgrade "Microsoft.PowerShell" --accept-source-agreements --accept-package-agreements
-            Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor Magenta
+            Write-Host "PowerShell has been updated. Please restart your shell to reflect changes" -ForegroundColor $finishedColor
         } else {
-            Write-Host "Your PowerShell is up to date." -ForegroundColor Green
+            Write-Host "Your PowerShell is up to date." -ForegroundColor $successColor
         }
     } catch {
         Write-Error "Failed to update PowerShell. Error: $_"
