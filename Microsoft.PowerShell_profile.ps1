@@ -16,7 +16,7 @@
 ############                                                                                                         ############
 #################################################################################################################################
 
-# test Update-Profile function 2
+# test Update-Profile function 3
 
 # Color variables
 $fetchColor = "Cyan"
