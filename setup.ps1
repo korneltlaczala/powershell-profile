@@ -1,3 +1,4 @@
+Write-Host "Test-prompt for developer" -ForegroundColor darkYellow
 $informationColor = "Cyan"
 $successColor = "Magenta"
 $profileURL = "https://github.com/korneltlaczala/powershell-profile/raw/dev/Microsoft.PowerShell_profile.ps1"
