@@ -138,7 +138,7 @@ catch {
 # zfz Install for zoxide completions
 try {
     Write-Host "Installing zfz..." -ForegroundColor $informationColor
-    winget install -h zfz
+    winget install -h fzf
     Write-Host "zfz installed successfully." -ForegroundColor $successColor
 }
 catch {
