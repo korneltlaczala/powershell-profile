@@ -102,8 +102,8 @@ function Update-PowerShell {
     }
 }
 
-Update-Profile
-Update-PowerShell
+# Update-Profile
+# Update-PowerShell
 
 
 # # Admin Check and Prompt Customization
