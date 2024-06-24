@@ -48,7 +48,7 @@ function Get-LatestCommitHash {
         "Pragma" = "no-cache"
     }
     $html = Invoke-WebRequest -Uri $url -Headers $headers -UseBasicParsing
-    $commits = $html.links | Where-Object {$_.href -like "*/korneltlaczala/powershell-profile/commit/*"}
+    $commits = $html.links | Where-Object {$_.href -like "*/$user/$repo/commit/*"}
     $topCommit = $commits[0]
     $commitHash = $topCommit.href | Split-Path -Leaf
     return $commitHash
