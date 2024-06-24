@@ -63,7 +63,7 @@ else {
 # OMP Install
 try {
     Write-Host "Installing Oh My Posh..." -ForegroundColor $informationColor
-    winget install -e --accept-source-agreements --accept-package-agreements JanDeDobbeleer.OhMyPosh
+    winget install -h -e --accept-source-agreements --accept-package-agreements JanDeDobbeleer.OhMyPosh
     write-host "Oh My Posh installed successfully." -ForegroundColor $successColor
 }
 catch {
@@ -129,7 +129,7 @@ catch {
 # zoxide Install
 try {
     Write-Host "Installing zoxide..." -ForegroundColor $informationColor
-    winget install -e --id ajeetdsouza.zoxide
+    winget install -h -e --id ajeetdsouza.zoxide
     Write-Host "zoxide installed successfully." -ForegroundColor $successColor
 }
 catch {
@@ -138,7 +138,7 @@ catch {
 # zfz Install for zoxide completions
 try {
     Write-Host "Installing zfz..." -ForegroundColor $informationColor
-    winget install zfz
+    winget install -h zfz
     Write-Host "zfz installed successfully." -ForegroundColor $successColor
 }
 catch {
