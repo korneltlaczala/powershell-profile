@@ -73,12 +73,11 @@ function Update-Profile {
     try {
         Write-Host "Checking for profile updates..." -ForegroundColor $fetchColor
 
-        $url = "https://raw.githubusercontent.com/korneltlaczala/powershell-profile/dev/Microsoft.PowerShell_profile.ps1"
-        $cacheBuster = [System.Guid]::NewGuid().ToString()
-        $urlWithCacheBuster = "$url?cb=$cacheBuster"
+        $commitHash = Get-LatestCommitHash
+        $url = "https://raw.githubusercontent.com/korneltlaczala/powershell-profile/$commitHash/Microsoft.PowerShell_profile.ps1"
 
         $oldhash = Get-FileHash $PROFILE
-        Invoke-RestMethod -Uri $urlWithCacheBuster -Headers @{"Cache-Control"="no-cache"} -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
+        Invoke-RestMethod -Uri $url -OutFile "$env:temp/Microsoft.PowerShell_profile.ps1"
         $newhash = Get-FileHash "$env:temp/Microsoft.PowerShell_profile.ps1"
 
         if ($newhash.Hash -ne $oldhash.Hash) {
