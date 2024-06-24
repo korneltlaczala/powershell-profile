@@ -45,7 +45,6 @@ function Get-LatestCommitHash {
         "User-Agent" = "PowerShell"
         "Cache-Control" = "no-cache"
         "Pragma" = "no-cache"
-        "If-Modified-Since" = [DateTime]::UtcNow.ToString('R')
     }
     $commitInfo = Invoke-RestMethod -Uri $apiUrl -Headers $headers
     return $commitInfo.sha
