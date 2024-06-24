@@ -25,42 +25,6 @@ if (-not (Test-InternetConnection)) {
     break
 }
 
-# Profile creation or update
-if (!(Test-Path -Path $PROFILE -PathType Leaf)) {
-    try {
-        # Detect Version of PowerShell & Create Profile directories if they do not exist.
-        $profilePath = ""
-        if ($PSVersionTable.PSEdition -eq "Core") { 
-            $profilePath = "$env:userprofile\Documents\Powershell"
-        }
-        elseif ($PSVersionTable.PSEdition -eq "Desktop") {
-            $profilePath = "$env:userprofile\Documents\WindowsPowerShell"
-        }
-
-        if (!(Test-Path -Path $profilePath)) {
-            New-Item -Path $profilePath -ItemType "directory"
-        }
-
-        Invoke-RestMethod $profileURL -OutFile $PROFILE
-        Write-Host "The profile @ [$PROFILE] has been created."
-        Write-Host "If you want to make any personal changes or customizations, please do so at [$profilePath\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
-    }
-    catch {
-        Write-Error "Failed to create or update the profile. Error: $_"
-    }
-}
-else {
-    try {
-        Get-Item -Path $PROFILE | Move-Item -Destination "oldprofile.ps1" -Force
-        Invoke-RestMethod $profileURL -OutFile $PROFILE
-        Write-Host "The profile @ [$PROFILE] has been created and old profile removed."
-        Write-Host "Please back up any persistent components of your old profile (oldprofile.ps1 in this directory) to [$HOME\Documents\PowerShell\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
-    }
-    catch {
-        Write-Error "Failed to backup and update the profile. Error: $_"
-    }
-}
-
 # OMP Install
 try {
     Write-Host "Installing Oh My Posh..." -ForegroundColor $informationColor
@@ -101,13 +65,6 @@ catch {
     Write-Error "Failed to download or install the Cascadia Code font. Error: $_"
 }
 
-# Final check and message to the user
-if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "CaskaydiaCove NF")) {
-    Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes." -ForegroundColor Magenta
-} else {
-    Write-Warning "Setup completed with errors. Please check the error messages above."
-}
-
 # Choco install
 try {
     Write-Host "Installing Chocolatey..." -ForegroundColor $informationColor
@@ -145,3 +102,49 @@ try {
 catch {
     Write-Error "Failed to install zfz. Error: $_"
 }
+
+# Profile creation or update
+if (!(Test-Path -Path $PROFILE -PathType Leaf)) {
+    try {
+        # Detect Version of PowerShell & Create Profile directories if they do not exist.
+        $profilePath = ""
+        if ($PSVersionTable.PSEdition -eq "Core") { 
+            $profilePath = "$env:userprofile\Documents\Powershell"
+        }
+        elseif ($PSVersionTable.PSEdition -eq "Desktop") {
+            $profilePath = "$env:userprofile\Documents\WindowsPowerShell"
+        }
+
+        if (!(Test-Path -Path $profilePath)) {
+            New-Item -Path $profilePath -ItemType "directory"
+        }
+
+        Write-Host "Fetching profile..." -ForegroundColor $informationColor
+        Invoke-RestMethod $profileURL -OutFile $PROFILE
+        Write-Host "The profile @ [$PROFILE] has been created." -ForegroundColor $successColor
+        Write-Host "If you want to make any personal changes or customizations, please do so at [$profilePath\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
+    }
+    catch {
+        Write-Error "Failed to create or update the profile. Error: $_"
+    }
+}
+else {
+    try {
+        Write-Host "Fetching updated profile..." -ForegroundColor $informationColor
+        Get-Item -Path $PROFILE | Move-Item -Destination "oldprofile.ps1" -Force
+        Invoke-RestMethod $profileURL -OutFile $PROFILE
+        Write-Host "The profile @ [$PROFILE] has been created and old profile removed." -ForegroundColor $successColor
+        Write-Host "Please back up any persistent components of your old profile (oldprofile.ps1 in this directory) to [$HOME\Documents\PowerShell\Profile.ps1] as there is an updater in the installed profile which uses the hash to update the profile and will lead to loss of changes"
+    }
+    catch {
+        Write-Error "Failed to backup and update the profile. Error: $_"
+    }
+}
+
+# Final check and message to the user
+if ((Test-Path -Path $PROFILE) -and (winget list --name "OhMyPosh" -e) -and ($fontFamilies -contains "CaskaydiaCove NF")) {
+    Write-Host "Setup completed successfully. Please restart your PowerShell session to apply changes." -ForegroundColor Magenta
+} else {
+    Write-Warning "Setup completed with errors. Please check the error messages above."
+}
+
