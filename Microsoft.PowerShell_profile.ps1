@@ -185,7 +185,7 @@ $EDITOR = if (Test-CommandExists nvim) { 'nvim' }
           elseif (Test-CommandExists notepad++) { 'notepad++' }
           elseif (Test-CommandExists sublime_text) { 'sublime_text' }
           else { 'notepad' }
-Set-Alias -Name vim -Value & $EDITOR
+Set-Alias -Name vim -Value $EDITOR
 # function vim($file) {
 #     if ($file) {
 #         & $EDITOR $file
