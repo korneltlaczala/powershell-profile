@@ -169,23 +169,23 @@ function Update-PowerShell {
 # $adminSuffix = if ($isAdmin) { " [ADMIN]" } else { "" }
 # $Host.UI.RawUI.WindowTitle = "PowerShell {0}$adminSuffix" -f $PSVersionTable.PSVersion.ToString()
 
-# # Utility Functions
-# function Test-CommandExists {
-#     param($command)
-#     $exists = $null -ne (Get-Command $command -ErrorAction SilentlyContinue)
-#     return $exists
-# }
+# Utility Functions
+function Test-CommandExists {
+    param($command)
+    $exists = $null -ne (Get-Command $command -ErrorAction SilentlyContinue)
+    return $exists
+}
 
-# # Editor Configuration
-# $EDITOR = if (Test-CommandExists nvim) { 'nvim' }
-#           elseif (Test-CommandExists pvim) { 'pvim' }
-#           elseif (Test-CommandExists vim) { 'vim' }
-#           elseif (Test-CommandExists vi) { 'vi' }
-#           elseif (Test-CommandExists code) { 'code' }
-#           elseif (Test-CommandExists notepad++) { 'notepad++' }
-#           elseif (Test-CommandExists sublime_text) { 'sublime_text' }
-#           else { 'notepad' }
-# Set-Alias -Name vim -Value $EDITOR
+# Editor Configuration
+$EDITOR = if (Test-CommandExists nvim) { 'nvim' }
+          elseif (Test-CommandExists pvim) { 'pvim' }
+          elseif (Test-CommandExists vim) { 'vim' }
+          elseif (Test-CommandExists vi) { 'vi' }
+          elseif (Test-CommandExists code) { 'code' }
+          elseif (Test-CommandExists notepad++) { 'notepad++' }
+          elseif (Test-CommandExists sublime_text) { 'sublime_text' }
+          else { 'notepad' }
+Set-Alias -Name vim -Value $EDITOR
 
 # function Edit-Profile {
 #     vim $PROFILE.CurrentUserAllHosts
