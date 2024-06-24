@@ -114,17 +114,16 @@ function Update-Profile {
     if ($profileUpdated -eq $false) {
         return
     }
-    
+    if ($NoReload) {
+        Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
+        return
+    }
+
     try {
-        if ($NoReload) {
-            Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
-        }
-        else {
-            Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
-            . $PROFILE
-            how-to-blow-a-function
-            Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
-        }
+        Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
+        . $PROFILE
+        how-to-blow-a-function
+        Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
     } catch {
         Write-Error "Failed to reload the profile. Error: $_"
         Write-Host "Please restart your shell" -ForegroundColor $failureColor
