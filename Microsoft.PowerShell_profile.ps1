@@ -492,4 +492,5 @@ if ($is_a_reload) {
 
 Update-Profile
 Update-PowerShell
+Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
