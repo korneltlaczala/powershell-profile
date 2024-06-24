@@ -124,8 +124,18 @@ function Update-PowerShell {
     }
 }
 
-Update-Profile
-Update-PowerShell
+function Update-Self {
+    if (!(Test-GitHubConnection)) {
+        Write-Host "Skipping self-update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
+        return
+    }
+
+    Write-Host "Connecting to GitHub.com..." -ForegroundColor $successColor
+
+    Update-Profile
+    Update-PowerShell
+}
+Update-Self
 
 
 # # Admin Check and Prompt Customization
