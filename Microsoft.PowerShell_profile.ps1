@@ -189,6 +189,7 @@ Set-Alias -Name vim -Value "$EDITOR.exe"
 
 function Edit-Profile {
     vim $PROFILE.CurrentUserAllHosts
+    Write-Host "Profile has been updated. Reloading..."
     . $PROFILE
 }
 Write-Host "WTH is happening"
