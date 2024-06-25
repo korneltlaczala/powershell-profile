@@ -190,6 +190,7 @@ Set-Alias -Name vim -Value "$EDITOR.exe"
 function Edit-Profile {
     vim $PROFILE.CurrentUserAllHosts
 }
+Write-Host "WTH is happening"
 # function touch($file) { "" | Out-File $file -Encoding ASCII }
 # function ff($name) {
 #     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
