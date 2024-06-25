@@ -187,17 +187,9 @@ $EDITOR = if (Test-CommandExists nvim) { 'nvim' }
           else { 'notepad' }
 Set-Alias -Name vim -Value "$EDITOR.exe"
 
-# function vim($file) {
-#     if ($file) {
-#         & $EDITOR $file
-#     } else {
-#         & $EDITOR
-#     }
-# }
-
-# function Edit-Profile {
-#     vim $PROFILE.CurrentUserAllHosts
-# }
+function Edit-Profile {
+    vim $PROFILE.CurrentUserAllHosts
+}
 # function touch($file) { "" | Out-File $file -Encoding ASCII }
 # function ff($name) {
 #     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
