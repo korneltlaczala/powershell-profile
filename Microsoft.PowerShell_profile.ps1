@@ -219,7 +219,7 @@ function reload {
     } else {
         Start-Process wt -ArgumentList "pwsh.exe -NoExit -Command cd $currentPath"
     }
-    Start-Sleep -Seconds 0.1
+    Start-Sleep -Seconds 0.5
     exit
 
     # save current path to a file in tmp dir
