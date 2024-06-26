@@ -16,8 +16,6 @@
 ############                                                                                                         ############
 #################################################################################################################################
 
-# test Update-Profile function 8
-
 # Color variables
 $fetchColor = "Cyan"
 $updateColor = "DarkYellow"
@@ -221,16 +219,6 @@ function reload {
     }
     Start-Sleep -Seconds 1
     exit
-
-    # save current path to a file in tmp dir
-    # Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
-    # launch new powershell session
-    # Start-Process wt
-        # new session will obvsly run the $profile script
-        # make an attempt to read the path from file in tmp dir -> that will be a new function in itself
-        # cd to this directory
-        # maybe remove the file from tmp dir
-    # exit from the old session
 }
 
 function unzip ($file) {
