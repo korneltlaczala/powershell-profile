@@ -356,6 +356,8 @@ function lazyg {
     git push
 }
 
+function gitlog { git log --oneline }
+
 # Quick Access to System Information
 function sysinfo { Get-ComputerInfo }
 
