@@ -326,6 +326,10 @@ function epp { vim $PROFILE }
 function upp { Update-Profile }
 function rpp { reload-profile}
 
+function uprel {
+    Update-Profile
+    reload
+}
 
 # Simplified Process Management
 function k9 { Stop-Process -Name $args[0] }
