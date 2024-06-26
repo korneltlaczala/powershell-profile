@@ -318,23 +318,23 @@ function gs { git status }
 
 function ga { git add . }
 
-function gc { param($m) git commit -m "$m" }
+# function gc { param($m) git commit -m "$m" }
 
-# function gp { git push }
+function gp { git push }
 
-# function g { z Github }
+function g { z Github }
 
-# function gcl { git clone "$args" }
+function gcl { git clone "$args" }
 
-# function gcom {
-#     git add .
-#     git commit -m "$args"
-# }
-# function lazyg {
-#     git add .
-#     git commit -m "$args"
-#     git push
-# }
+function gcom {
+    git add .
+    git commit -m "$args"
+}
+function lazyg {
+    git add .
+    git commit -m "$args"
+    git push
+}
 
 # # Quick Access to System Information
 # function sysinfo { Get-ComputerInfo }
