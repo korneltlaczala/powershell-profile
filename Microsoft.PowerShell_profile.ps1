@@ -495,5 +495,5 @@ Use 'Show-Help' to display this help message.
 
 Update-Profile
 Update-PowerShell
-Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
+Write-Host "----------------------------------------"
