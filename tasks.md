@@ -18,3 +18,7 @@
 
 - downloads folder
 - quick "My Drive" access (zoxide)
+
+### Clean code
+
+- add new functions to help
