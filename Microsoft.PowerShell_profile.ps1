@@ -84,7 +84,6 @@ function Update-Profile {
         return
     }
 
-    $profileUpdated = $false
     try {
         Write-Host "Checking for profile updates..." -ForegroundColor $fetchColor
 
@@ -99,7 +98,7 @@ function Update-Profile {
             Write-host "Updating profile..." -ForegroundColor $updateColor
             Copy-Item -Path "$env:temp/Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
             Write-Host "Profile has been updated." -ForegroundColor $finishedColor
-            $profileUpdated = $true
+            Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
         }
         else {
             Write-Host "Your profile is up to date." -ForegroundColor $successColor
@@ -109,26 +108,6 @@ function Update-Profile {
         return
     } finally {
         Remove-Item "$env:temp/Microsoft.PowerShell_profile.ps1" -ErrorAction SilentlyContinue
-    }
-
-    if ($profileUpdated -eq $false) {
-        return
-    }
-    if ($NoReload) {
-        Write-Host "Please restart your shell to reflect changes" -ForegroundColor $finishedColor
-        return
-    }
-
-    try {
-        Write-Host "Running profile file again to implement the changes..." -ForegroundColor $finishedColor
-        New-Item -Path $profilePath -Name "__just__a__reload.info" -ItemType File -Force | Out-Null
-        . $PROFILE
-        Write-Host "Changes applied, YOU DO NOT HAVE TO RESTART your shell" -ForegroundColor $successColor
-    } catch {
-        Write-Error "Failed to reload the profile. Error: $_"
-        Write-Host "Please restart your shell" -ForegroundColor $failureColor
-    } finally {
-        Remove-Item "$profilePath\__just__a__reload.info" -ErrorAction SilentlyContinue
     }
 }
 
@@ -189,10 +168,9 @@ Set-Alias -Name vim -Value "$EDITOR.exe"
 
 function Edit-Profile {
     vim $PROFILE.CurrentUserAllHosts
-    Write-Host "Profile has been updated. Reloading..."
-    . $PROFILE
+    Write-Host "Profile has been updated. Please restart your shell to reflect the changes"
 }
-Write-Host "WTH is happening"
+
 # function touch($file) { "" | Out-File $file -Encoding ASCII }
 # function ff($name) {
 #     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
@@ -486,11 +464,6 @@ pst - Retrieves text from the clipboard.
 
 Use 'Show-Help' to display this help message.
 "@
-}
-
-$is_a_reload = Test-Path -Path "$profilePath\__just__a__reload.info"
-if ($is_a_reload) {
-    return
 }
 
 Update-Profile
