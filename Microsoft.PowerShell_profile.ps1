@@ -209,7 +209,7 @@ function reload-profile {
     )
 
     if ($c) {clear}
-    & $profile
+    . $profile
 }
 
 # function unzip ($file) {
