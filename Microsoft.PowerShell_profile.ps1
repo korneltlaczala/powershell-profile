@@ -202,8 +202,8 @@ function uptime {
     }
 }
 
+# This function still does not work properly, as it does not reload the profile correctly.
 function reload-profile {
-
     param (
         [switch]$noclear
     )
