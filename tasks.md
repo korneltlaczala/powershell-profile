@@ -12,3 +12,6 @@
     - try to read in path from file in tmp dir
     - if no path -> return
     - cd path
+
+- gitlog
+- git open remote repo
