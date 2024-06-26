@@ -212,6 +212,21 @@ function reload-profile {
     . $profile
 }
 
+function reload {
+    # save current path to a file in tmp dir
+    $currentPath = Get-Location
+    Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
+    # exit from the old session
+    # exit
+    # launch new powershell session
+    Write-Host "Launching new PowerShell session..."
+    Write-Host "Would you be logged as admin?: $isAdmin"
+    # new session will obvsly run the $profile script
+    # make an attempt to read the path from file in tmp dir -> that will be a new function in itself
+    # cd to this directory
+    # maybe remove the file from tmp dir
+}
+
 function unzip ($file) {
     Write-Output("Extracting", $file, "to", $pwd)
     $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
