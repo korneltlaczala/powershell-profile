@@ -205,10 +205,10 @@ function uptime {
 function reload-profile {
 
     param (
-        [switch]$c
+        [switch]$noclear
     )
 
-    if ($c) {clear}
+    if (! $noclear) {clear}
     . $profile
 }
 
