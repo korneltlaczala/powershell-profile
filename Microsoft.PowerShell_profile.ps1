@@ -212,11 +212,6 @@ function reload-profile {
     . $profile
 }
 
-function reload {
-    # just testing the waters here
-    exit
-}
-
 function unzip ($file) {
     Write-Output("Extracting", $file, "to", $pwd)
     $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
@@ -303,7 +298,13 @@ function docs { Set-Location -Path $HOME\Documents }
 function dtop { Set-Location -Path $HOME\Desktop }
 
 # Quick Access to Editing the Profile
-function ep { vim $PROFILE }
+# epp - Edit PowerShell Profile
+# upp - Update PowerShell Profile
+# rpp - Reload PowerShell Profile
+function epp { vim $PROFILE }
+function upp { Update-Profile }
+function rpp { reload-profile}
+
 
 # Simplified Process Management
 function k9 { Stop-Process -Name $args[0] }
@@ -312,12 +313,12 @@ function k9 { Stop-Process -Name $args[0] }
 function la { Get-ChildItem -Path . -Force | Format-Table -AutoSize }
 function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
-# # Git Shortcuts
-# function gs { git status }
+# Git Shortcuts
+function gs { git status }
 
-# function ga { git add . }
+function ga { git add . }
 
-# function gc { param($m) git commit -m "$m" }
+function gc { param($m) git commit -m "$m" }
 
 # function gp { git push }
 
