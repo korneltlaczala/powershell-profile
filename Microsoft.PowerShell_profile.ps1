@@ -213,19 +213,24 @@ function reload-profile {
 }
 
 function reload {
-    # save current path to a file in tmp dir
     $currentPath = Get-Location
+    if ($isAdmin) {
+        Start-Process wt -Verb runAs -ArgumentList "pwsh.exe -NoExit -Command cd $currentPath"
+    } else {
+        Start-Process wt -ArgumentList "pwsh.exe -NoExit -Command cd $currentPath"
+    }
+    Start-Sleep -Seconds 0.1
+    exit
+
+    # save current path to a file in tmp dir
     # Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
     # launch new powershell session
     # Start-Process wt
-    Start-Process wt -ArgumentList "pwsh.exe -NoExit -Command cd $currentPath"
-    Start-Sleep -Seconds 2
-    # exit from the old session
-    exit
         # new session will obvsly run the $profile script
         # make an attempt to read the path from file in tmp dir -> that will be a new function in itself
         # cd to this directory
         # maybe remove the file from tmp dir
+    # exit from the old session
 }
 
 function unzip ($file) {
