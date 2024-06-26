@@ -476,3 +476,5 @@ Update-Profile
 Update-PowerShell
 Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
+#temporarily
+cd C:\Users\Kornel\Github\powershell-profile
