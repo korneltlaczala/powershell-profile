@@ -318,6 +318,9 @@ function gs { git status }
 
 function ga { git add . }
 
+function gitcom { git commit -m "$args" }
+
+function gd { git diff }
 
 # ---------------------------------------------
 # CONFLICTING ALIASES - needs fix
@@ -481,5 +484,3 @@ Update-Profile
 Update-PowerShell
 Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
-#temporarily
-cd C:\Users\Kornel\Github\powershell-profile
