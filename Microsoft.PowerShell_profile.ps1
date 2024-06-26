@@ -208,6 +208,12 @@ function uptime {
 }
 
 function reload-profile {
+
+    param (
+        [switch]$c
+    )
+
+    if ($c) {clear}
     & $profile
 }
 
