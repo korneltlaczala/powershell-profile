@@ -201,12 +201,12 @@ function uptime {
 }
 
 # This function still does not work properly, as it does not reload the profile correctly.
-function reload-profile {
+function Reload-Profile {
     param (
         [switch]$noclear
     )
 
-    if (! $noclear) {clear}
+    if (! $noclear) {Clear-Host}
     . $profile
 }
 
