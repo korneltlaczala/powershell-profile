@@ -171,45 +171,45 @@ function Edit-Profile {
     Write-Host "Profile has been updated. Please restart your shell to reflect the changes"
 }
 
-# function touch($file) { "" | Out-File $file -Encoding ASCII }
-# function ff($name) {
-#     Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
-#         Write-Output "$($_.FullName)"
-#     }
-# }
+function touch($file) { "" | Out-File $file -Encoding ASCII }
+function ff($name) {
+    Get-ChildItem -recurse -filter "*${name}*" -ErrorAction SilentlyContinue | ForEach-Object {
+        Write-Output "$($_.FullName)"
+    }
+}
 
-# # Network Utilities
-# function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
+# Network Utilities
+function Get-PubIP { (Invoke-WebRequest http://ifconfig.me/ip).Content }
 
-# # Open WinUtil
-# function winutil {
-# 	iwr -useb https://christitus.com/win | iex
-# }
+# Open WinUtil
+function winutil {
+	iwr -useb https://christitus.com/win | iex
+}
 
-# # System Utilities
-# function admin {
-#     if ($args.Count -gt 0) {
-#         $argList = "& '$args'"
-#         Start-Process wt -Verb runAs -ArgumentList "pwsh.exe -NoExit -Command $argList"
-#     } else {
-#         Start-Process wt -Verb runAs
-#     }
-# }
+# System Utilities
+function admin {
+    if ($args.Count -gt 0) {
+        $argList = "& '$args'"
+        Start-Process wt -Verb runAs -ArgumentList "pwsh.exe -NoExit -Command $argList"
+    } else {
+        Start-Process wt -Verb runAs
+    }
+}
 
-# # Set UNIX-like aliases for the admin command, so sudo <command> will run the command with elevated rights.
-# Set-Alias -Name su -Value admin
+# Set UNIX-like aliases for the admin command, so sudo <command> will run the command with elevated rights.
+Set-Alias -Name su -Value admin
 
-# function uptime {
-#     if ($PSVersionTable.PSVersion.Major -eq 5) {
-#         Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
-#     } else {
-#         net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
-#     }
-# }
+function uptime {
+    if ($PSVersionTable.PSVersion.Major -eq 5) {
+        Get-WmiObject win32_operatingsystem | Select-Object @{Name='LastBootUpTime'; Expression={$_.ConverttoDateTime($_.lastbootuptime)}} | Format-Table -HideTableHeaders
+    } else {
+        net statistics workstation | Select-String "since" | ForEach-Object { $_.ToString().Replace('Statistics since ', '') }
+    }
+}
 
-# function reload-profile {
-#     & $profile
-# }
+function reload-profile {
+    & $profile
+}
 
 # function unzip ($file) {
 #     Write-Output("Extracting", $file, "to", $pwd)
