@@ -15,3 +15,6 @@
 
 - gitlog
 - git open remote repo
+
+- downloads folder
+- quick "My Drive" access (zoxide)
