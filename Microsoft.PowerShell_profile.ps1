@@ -216,12 +216,13 @@ function reload {
     # save current path to a file in tmp dir
     $currentPath = Get-Location
     Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
-    # exit from the old session
-    exit
     # launch new powershell session
     Write-Host "Launching new PowerShell session..."
     Write-Host "Would you be logged as admin?: $isAdmin"
     Start-Process wt
+    Start-Sleep -Seconds 2
+    # exit from the old session
+    exit
         # new session will obvsly run the $profile script
         # make an attempt to read the path from file in tmp dir -> that will be a new function in itself
         # cd to this directory
