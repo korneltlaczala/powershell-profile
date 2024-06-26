@@ -217,7 +217,7 @@ function reload {
     $currentPath = Get-Location
     Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
     # exit from the old session
-    # exit
+    exit
     # launch new powershell session
     Write-Host "Launching new PowerShell session..."
     Write-Host "Would you be logged as admin?: $isAdmin"
