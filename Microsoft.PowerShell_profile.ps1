@@ -221,10 +221,11 @@ function reload {
     # launch new powershell session
     Write-Host "Launching new PowerShell session..."
     Write-Host "Would you be logged as admin?: $isAdmin"
-    # new session will obvsly run the $profile script
-    # make an attempt to read the path from file in tmp dir -> that will be a new function in itself
-    # cd to this directory
-    # maybe remove the file from tmp dir
+    Start-Process wt
+        # new session will obvsly run the $profile script
+        # make an attempt to read the path from file in tmp dir -> that will be a new function in itself
+        # cd to this directory
+        # maybe remove the file from tmp dir
 }
 
 function unzip ($file) {
