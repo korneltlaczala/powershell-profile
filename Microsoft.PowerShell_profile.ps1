@@ -215,11 +215,10 @@ function reload-profile {
 function reload {
     # save current path to a file in tmp dir
     $currentPath = Get-Location
-    Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
+    # Set-Content -Path "$env:temp\powershell_init_path.tmp" -Value $currentPath
     # launch new powershell session
-    Write-Host "Launching new PowerShell session..."
-    Write-Host "Would you be logged as admin?: $isAdmin"
-    Start-Process wt
+    # Start-Process wt
+    Start-Process wt -Verb runAs -ArgumentList "pwsh.exe -NoExit -Command cd $currentPath"
     Start-Sleep -Seconds 2
     # exit from the old session
     exit
