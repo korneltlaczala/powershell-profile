@@ -13,12 +13,16 @@
     - if no path -> return
     - cd path
 
-- gitlog
 - git open remote repo
 
 - downloads folder
-- quick "My Drive" access (zoxide)
+
+- start timer
+- start stopwatch
+- set an alarm
+
+- bind a specific key to focus currently open terminal session
 
 ### Clean code
 
-- add new functions to help
+- add new functions to help listing
