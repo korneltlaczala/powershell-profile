@@ -27,6 +27,8 @@
 
 - command new opens new terminal window
 
+- joinpdf to join pdf files together
+
 ### Improvements
 - make admin window open in the same location by default
 
