@@ -25,6 +25,9 @@
 
 - open chat gpt in a new chrome window
 
+### Improvements
+- make admin window open in the same location by default
+
 ### Clean code
 
 - add new functions to help listing
