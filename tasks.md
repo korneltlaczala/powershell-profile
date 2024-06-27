@@ -25,6 +25,8 @@
 
 - open chat gpt in a new chrome window
 
+- command new opens new terminal window
+
 ### Improvements
 - make admin window open in the same location by default
 
