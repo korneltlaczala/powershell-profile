@@ -23,6 +23,8 @@
 
 - bind a specific key to focus currently open terminal session
 
+- open chat gpt in a new chrome window
+
 ### Clean code
 
 - add new functions to help listing
