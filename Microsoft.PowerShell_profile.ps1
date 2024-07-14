@@ -303,8 +303,8 @@ function mkcd { param($dir) mkdir $dir -Force; Set-Location $dir }
 
 #no-clear Navigation Shortcuts
 function docs { Set-Location -Path $HOME\Documents }
-
 function dtop { Set-Location -Path $HOME\Desktop }
+function down { Set-Location -Path $HOME\Downloads }
 
 # Quick Access to Editing the Profile
 # epp - Edit PowerShell Profile
