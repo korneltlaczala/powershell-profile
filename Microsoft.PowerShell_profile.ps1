@@ -229,11 +229,10 @@ function unzip () {
     )
 
     $OutFolder = Join-Path $pwd.Path $OutFolder
-    Write-Output("Extracting", $file, "to", $OutFolder)
 
-    # Write-Output("Extracting", $file, "to", $pwd)
-    # $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
-    # Expand-Archive -Path $fullFile -DestinationPath $pwd
+    Write-Output("Extracting", $file, "to", $OutFolder)
+    $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
+    Expand-Archive -Path $fullFile -DestinationPath $OutFolder
 }
 function hb {
     if ($args.Length -eq 0) {
