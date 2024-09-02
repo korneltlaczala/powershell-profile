@@ -227,11 +227,13 @@ function unzip () {
         [string]$file,
         [string]$OutFolder
     )
-    $OutFolder = $pwd + "\" + $OutFolder
 
-    Write-Output("Extracting", $file, "to", $pwd)
-    $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
-    Expand-Archive -Path $fullFile -DestinationPath $pwd
+    $OutFolder = Join-Path $pwd.Path $OutFolder
+    Write-Output("Extracting", $file, "to", $OutFolder)
+
+    # Write-Output("Extracting", $file, "to", $pwd)
+    # $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
+    # Expand-Archive -Path $fullFile -DestinationPath $pwd
 }
 function hb {
     if ($args.Length -eq 0) {
