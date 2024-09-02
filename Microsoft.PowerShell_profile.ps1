@@ -230,12 +230,13 @@ function unzip () {
 
     $OutFolder = Join-Path $pwd.Path $OutFolder
 
-    Write-Host("Extracting") -NoNewline
-    Write-HOst($file) -ForegroundColor "Magenta"
-    Write-Host("to") -NoNewline
-    write-host($OutFolder) -ForegroundColor "DarkYellow"
+    Write-Host("Extracting: ") -NoNewline
+    Write-Host($file) -ForegroundColor "Magenta"
+    Write-Host("to: ") -NoNewline
+    Write-Host($OutFolder) -ForegroundColor "DarkYellow"
     $fullFile = Get-ChildItem -Path $pwd -Filter $file | ForEach-Object { $_.FullName }
     Expand-Archive -Path $fullFile -DestinationPath $OutFolder
+    Write-Host("Extraction complete.") -ForegroundColor $successColor
 }
 function hb {
     if ($args.Length -eq 0) {
