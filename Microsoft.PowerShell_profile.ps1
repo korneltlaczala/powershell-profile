@@ -84,9 +84,7 @@ function Update-Profile {
         $profileRepo = "powershell-profile"
         $profileBranch = "dev"
 
-        Write-Host "Debugging 1"
         $commitHash = Get-LatestCommitHash -user $profileAuthor -repo $profileRepo -branch $profileBranch
-        Write-Host "Debugging 2"
         $url = "https://raw.githubusercontent.com/$profileAuthor/$profileRepo/$commitHash/Microsoft.PowerShell_profile.ps1"
 
         $oldhash = Get-FileHash $PROFILE
