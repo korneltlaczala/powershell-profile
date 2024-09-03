@@ -72,12 +72,6 @@ if (Test-Path($ChocolateyProfile)) {
 # Check for Profile Updates
 function Update-Profile {
 
-    # check for last update
-        # if lastupdate.log does not exist, perform the update check
-        # if lastupdate.log exists, check the last update time
-        # if updated in the last 24 hours, skip the update check
-
-
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping profile update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
         return
@@ -104,7 +98,7 @@ function Update-Profile {
         }
         # Get-Date | Set-Content -Path "$profilePath\lastupdate.log" -Force
     } catch {
-        Write-Error "Unable to check for `$profile updates"
+        Write-Error "Unable to check for profile updates"
         return
     } finally {
         Remove-Item "$env:temp/Microsoft.PowerShell_profile.ps1" -ErrorAction SilentlyContinue
