@@ -79,7 +79,7 @@ function Update-Profile {
         # if updated in the last 24 hours, skip the update check
 
     if (Test-Path "$profilePath\lastupdate.log") {
-        $lastUpdate = Get-Content -Path "$profilePath\lastupdate.log"
+        $lastUpdate = Get-Content -Path "$profilePath\lastupdate.log" -First 1
         $lastUpdateDate = [datetime]$lastUpdate
         $timeSinceLastUpdate = (Get-Date) - $lastUpdateDate
         if ($timeSinceLastUpdate.TotalHours -lt 24) {
