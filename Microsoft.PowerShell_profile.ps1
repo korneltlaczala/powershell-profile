@@ -22,7 +22,6 @@ $updateColor = "DarkYellow"
 $installColor = "DarkYellow"
 $finishedColor = "Magenta"
 $successColor = "Green"
-$failureColor = "Red"
 
 $profilePath = Split-Path -Path $PROFILE
 # Initial GitHub.com connectivity check with 1 second timeout
@@ -78,15 +77,6 @@ function Update-Profile {
         # if lastupdate.log exists, check the last update time
         # if updated in the last 24 hours, skip the update check
 
-    if (Test-Path "$profilePath\lastupdate.log") {
-        $lastUpdate = Get-Content -Path "$profilePath\lastupdate.log"
-        $lastUpdateDate = [datetime]$lastUpdate
-        $timeSinceLastUpdate = (Get-Date) - $lastUpdateDate
-        if ($timeSinceLastUpdate.TotalHours -lt 24) {
-            Write-Host "Skipping profile update check. Last update was $timeSinceLastUpdate ago." -ForegroundColor Yellow
-            return
-        }
-    }
 
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping profile update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
@@ -524,8 +514,18 @@ Use 'Show-Help' to display this help message.
 "@
 }
 
-Update-Profile
-Update-PowerShell
+if (Test-Path "$profilePath\lastupdate.log") {
+    $lastUpdate = Get-Content -Path "$profilePath\lastupdate.log"
+    $lastUpdateDate = [datetime]$lastUpdate
+    $timeSinceLastUpdate = (Get-Date) - $lastUpdateDate
+    if ($timeSinceLastUpdate.TotalHours -lt 24) {
+        Write-Host "Skipping profile update check. Last update was $timeSinceLastUpdate ago." -ForegroundColor Yellow
+    }
+    else {
+        Update-Profile
+        Update-PowerShell
+    }
+}
 Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
 Write-Host "----------------------------------------"
