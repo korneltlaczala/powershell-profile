@@ -516,7 +516,7 @@ Use 'Show-Help' to display this help message.
 
 if (Test-Path "$profilePath\lastupdate.log") {
     $lastUpdate = Get-Content -Path "$profilePath\lastupdate.log"
-    $lastUpdateDate = [datetime]$lastUpdate
+    $lastUpdateDate = [datetime]::ParseExact($lastUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
     $timeSinceLastUpdate = (Get-Date) - $lastUpdateDate
     if ($timeSinceLastUpdate.TotalHours -lt 24) {
         Write-Host "Skipping profile update check. Last update was $timeSinceLastUpdate ago." -ForegroundColor Yellow
