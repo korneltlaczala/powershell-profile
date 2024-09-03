@@ -514,7 +514,7 @@ Use 'Show-Help' to display this help message.
 }
 
 
-if (Test-Path "$profilePath\lastupdate.log") {
+if (Test-Path "$profilePath\lastProfileUpdate.log") {
     $lastProfileUpdate = Get-Content -Path "$profilePath\lastProfileUpdate.log" -First 1
     $lastProfileUpdateDate = [datetime]::ParseExact($lastProfileUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
     $timeSinceLastProfileUpdate = (Get-Date) - $lastProfileUpdateDate
@@ -522,6 +522,8 @@ if (Test-Path "$profilePath\lastupdate.log") {
         Write-Host "Skipping profile update check. Last update was $timeSinceLastProfileUpdate ago." -ForegroundColor Yellow
         $profile_update_skipped = $true
     }
+}
+if (Test-Path "$profilePath\lastPowershellUpdate.log") {
     $lastPowershellUpdate = Get-Content -Path "$profilePath\lastPowershellUpdate.log" -First 1
     $lastPowershellUpdateDate = [datetime]::ParseExact($lastPowershellUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
     $timeSinceLastPowershellUpdate = (Get-Date) - $lastPowershellUpdateDate
