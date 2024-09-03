@@ -514,17 +514,19 @@ Use 'Show-Help' to display this help message.
 "@
 }
 
+
 if (Test-Path "$profilePath\lastupdate.log") {
     $lastUpdate = Get-Content -Path "$profilePath\lastupdate.log"
     $lastUpdateDate = [datetime]::ParseExact($lastUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
     $timeSinceLastUpdate = (Get-Date) - $lastUpdateDate
     if ($timeSinceLastUpdate.TotalHours -lt 24) {
         Write-Host "Skipping profile update check. Last update was $timeSinceLastUpdate ago." -ForegroundColor Yellow
+        $update_skipped = $true
     }
-    else {
-        Update-Profile
-        Update-PowerShell
-    }
+}
+if (-not $update_skipped) {
+    Update-Profile
+    Update-PowerShell
 }
 Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
