@@ -72,6 +72,14 @@ if (Test-Path($ChocolateyProfile)) {
 
 # Check for Profile Updates
 function Update-Profile {
+
+    # if updated in the last 24 hours, skip the update check
+    if ((Get-Date) -lt (Get-Item $PROFILE).LastWriteTime.AddHours(24)) {
+        Write-Host "Skipping profile update check as it was updated in the last 24 hours." -ForegroundColor Yellow
+        return
+    }
+    Get-Date | Out-File -FilePath "$profilePath\lastupdate.log" -Force
+
     if (-not $global:canConnectToGitHub) {
         Write-Host "Skipping profile update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
         return
