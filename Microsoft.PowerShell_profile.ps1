@@ -100,7 +100,7 @@ function Update-Profile {
         else {
             Write-Host "Your profile is up to date." -ForegroundColor $successColor
         }
-        # Get-Date | Set-Content -Path "$profilePath\lastupdate.log" -Force
+        Get-Date | Set-Content -Path "$profilePath\lastProfileUpdate.log" -Force
     } catch {
         Write-Error "Unable to check for profile updates"
         return
@@ -133,6 +133,7 @@ function Update-PowerShell {
         } else {
             Write-Host "Your PowerShell is up to date." -ForegroundColor $successColor
         }
+        Get-Date | Set-Content -Path "$profilePath\lastPowershellUpdate.log" -Force
     } catch {
         Write-Error "Failed to update PowerShell. Error: $_"
     }
