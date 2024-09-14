@@ -223,7 +223,7 @@ function reload {
     } else {
         Start-Process wt -ArgumentList "pwsh.exe -NoExit -Command cd $currentPath"
     }
-    Start-Sleep -Seconds 1
+    Start-Sleep -Seconds 2
     exit
 }
 
