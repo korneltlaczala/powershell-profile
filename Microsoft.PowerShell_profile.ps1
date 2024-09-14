@@ -346,12 +346,10 @@ function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # Git Shortcuts
 function gs { git status }
-
-function ga { git add . }
-
-function gitcom { git commit -m "$args" }
-
 function gd { git diff }
+function ga { git add . }
+function gico { git commit -m "$args" }
+function gipu { git push}
 
 # ---------------------------------------------
 # CONFLICTING ALIASES - needs fix
