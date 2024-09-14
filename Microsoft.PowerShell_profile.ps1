@@ -360,7 +360,7 @@ function gd { git diff }
 # function gp { git push }
 # ---------------------------------------------
 
-function g { z Github }
+function g { __zoxide_z Github }
 
 function gcl { git clone "$args" }
 
