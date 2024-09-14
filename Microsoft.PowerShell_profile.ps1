@@ -345,24 +345,15 @@ function la { Get-ChildItem -Path . -Force | Format-Table -AutoSize }
 function ll { Get-ChildItem -Path . -Force -Hidden | Format-Table -AutoSize }
 
 # Git Shortcuts
+function g { __zoxide_z Github }
 function gs { git status }
 function gd { git diff }
+function gitlog { git log --oneline }
+
 function ga { git add . }
 function gico { git commit -m "$args" }
 function gipu { git push}
-
-# ---------------------------------------------
-# CONFLICTING ALIASES - needs fix
-# ---------------------------------------------
-# function gc { param($m) git commit -m "$m" }
-# function gp { git push }
-# ---------------------------------------------
-
-function g { __zoxide_z Github }
-
-function gcl { git clone "$args" }
-
-function gcom {
+function gitcom {
     git add .
     git commit -m "$args"
 }
@@ -371,8 +362,6 @@ function lazyg {
     git commit -m "$args"
     git push
 }
-
-function gitlog { git log --oneline }
 
 # Quick Access to System Information
 function sysinfo { Get-ComputerInfo }
