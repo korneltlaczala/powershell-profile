@@ -501,30 +501,30 @@ Use 'Show-Help' to display this help message.
 }
 
 
-# if (Test-Path "$profilePath\lastProfileUpdate.log") {
-#     $lastProfileUpdate = Get-Content -Path "$profilePath\lastProfileUpdate.log" -First 1
-#     $lastProfileUpdateDate = [datetime]::ParseExact($lastProfileUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
-#     $timeSinceLastProfileUpdate = (Get-Date) - $lastProfileUpdateDate
-#     if ($timeSinceLastProfileUpdate.TotalHours -lt 24) {
-#         Write-Host "Skipping profile update check. Last update was $timeSinceLastProfileUpdate ago." -ForegroundColor Yellow
-#         $profile_update_skipped = $true
-#     }
-# }
-# if (Test-Path "$profilePath\lastPowershellUpdate.log") {
-#     $lastPowershellUpdate = Get-Content -Path "$profilePath\lastPowershellUpdate.log" -First 1
-#     $lastPowershellUpdateDate = [datetime]::ParseExact($lastPowershellUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
-#     $timeSinceLastPowershellUpdate = (Get-Date) - $lastPowershellUpdateDate
-#     if ($timeSinceLastPowershellUpdate.TotalHours -lt 24) {
-#         Write-Host "Skipping profile update check. Last update was $timeSinceLastPowershellUpdate ago." -ForegroundColor Yellow
-#         $powershell_update_skipped = $true
-#     }
-# }
-# if (-not $profile_update_skipped) {
-#     Update-Profile
-# }
-# if (-not $powershell_update_skipped) {
-#     Update-PowerShell
-# }
+if (Test-Path "$profilePath\lastProfileUpdate.log") {
+    $lastProfileUpdate = Get-Content -Path "$profilePath\lastProfileUpdate.log" -First 1
+    $lastProfileUpdateDate = [datetime]::ParseExact($lastProfileUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
+    $timeSinceLastProfileUpdate = (Get-Date) - $lastProfileUpdateDate
+    if ($timeSinceLastProfileUpdate.TotalHours -lt 24) {
+        Write-Host "Skipping profile update check. Last update was $timeSinceLastProfileUpdate ago." -ForegroundColor Yellow
+        $profile_update_skipped = $true
+    }
+}
+if (Test-Path "$profilePath\lastPowershellUpdate.log") {
+    $lastPowershellUpdate = Get-Content -Path "$profilePath\lastPowershellUpdate.log" -First 1
+    $lastPowershellUpdateDate = [datetime]::ParseExact($lastPowershellUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
+    $timeSinceLastPowershellUpdate = (Get-Date) - $lastPowershellUpdateDate
+    if ($timeSinceLastPowershellUpdate.TotalHours -lt 24) {
+        Write-Host "Skipping profile update check. Last update was $timeSinceLastPowershellUpdate ago." -ForegroundColor Yellow
+        $powershell_update_skipped = $true
+    }
+}
+if (-not $profile_update_skipped) {
+    Update-Profile
+}
+if (-not $powershell_update_skipped) {
+    Update-PowerShell
+}
 Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
 Write-Host "----------------------------------------"
