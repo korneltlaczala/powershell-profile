@@ -377,6 +377,8 @@ function cpy { Set-Clipboard $args[0] }
 
 function pst { Get-Clipboard }
 
+function getpath { (Get-Location).Path | Set-Clipboard }
+
 # Enhanced PowerShell Experience
 Set-PSReadLineOption -Colors @{
     Command = 'Yellow'
