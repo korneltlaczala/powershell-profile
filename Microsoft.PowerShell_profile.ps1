@@ -313,6 +313,8 @@ function tail {
   Get-Content $Path -Tail $n -Wait:$f
 }
 
+Write-Host "here we go"
+
 # Quick File Creation
 function nf { param($name) New-Item -ItemType "file" -Path . -Name $name }
 
