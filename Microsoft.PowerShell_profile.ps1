@@ -313,7 +313,6 @@ function tail {
   Get-Content $Path -Tail $n -Wait:$f
 }
 
-Write-Host "here we go"
 
 # Quick File Creation
 function nf { param($name) New-Item -ItemType "file" -Path . -Name $name }
@@ -403,8 +402,10 @@ function Get-Theme {
     }
 }
 
+Write-Host "here we go"
 ## Final Line to set prompt
 Get-Theme
+Write-Host "here we don't go"
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 } else {
