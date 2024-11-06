@@ -504,6 +504,7 @@ Use 'Show-Help' to display this help message.
 "@
 }
 
+Write-Host "starting update checks"
 
 if (Test-Path "$profilePath\lastPowershellUpdate.log") {
     $lastPowershellUpdate = Get-Content -Path "$profilePath\lastPowershellUpdate.log" -First 1
@@ -514,6 +515,7 @@ if (Test-Path "$profilePath\lastPowershellUpdate.log") {
         $powershell_update_skipped = $true
     }
 }
+Write-Host "update checks in progress"
 if (Test-Path "$profilePath\lastProfileUpdate.log") {
     $lastProfileUpdate = Get-Content -Path "$profilePath\lastProfileUpdate.log" -First 1
     $lastProfileUpdateDate = [datetime]::ParseExact($lastProfileUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
@@ -523,6 +525,7 @@ if (Test-Path "$profilePath\lastProfileUpdate.log") {
         $profile_update_skipped = $true
     }
 }
+Write-Host "update checks concluded"
 Write-Host $canConnectToGitHub
 if (-not $powershell_update_skipped) {
     Update-PowerShell
