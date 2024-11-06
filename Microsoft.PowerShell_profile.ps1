@@ -521,6 +521,7 @@ if (Test-Path "$profilePath\lastProfileUpdate.log") {
         $profile_update_skipped = $true
     }
 }
+Write-Host $canConnectToGitHub
 if (-not $powershell_update_skipped) {
     Update-PowerShell
 }
