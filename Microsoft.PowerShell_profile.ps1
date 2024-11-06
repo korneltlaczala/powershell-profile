@@ -25,9 +25,7 @@ $successColor = "Green"
 
 $profilePath = Split-Path -Path $PROFILE
 # Initial GitHub.com connectivity check with 1 second timeout
-Write-Host "testing connection"
 $canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
-Write-Host "testing concluded"
 # Internet connection could be lost, so we need to check it every time we need to connect to GitHub, we need a function for that
 function Test-GitHubConnection {
     return Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
@@ -398,15 +396,12 @@ function Get-Theme {
             return
         }
     } else {
-        # oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
         oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\cobalt2.omp.json" | Invoke-Expression
     }
 }
 
-Write-Host "here we go"
 ## Final Line to set prompt
 Get-Theme
-Write-Host "here we don't go"
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 } else {
@@ -508,8 +503,6 @@ Use 'Show-Help' to display this help message.
 "@
 }
 
-Write-Host "starting update checks"
-
 if (Test-Path "$profilePath\lastPowershellUpdate.log") {
     $lastPowershellUpdate = Get-Content -Path "$profilePath\lastPowershellUpdate.log" -First 1
     $lastPowershellUpdateDate = [datetime]::ParseExact($lastPowershellUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
@@ -519,7 +512,6 @@ if (Test-Path "$profilePath\lastPowershellUpdate.log") {
         $powershell_update_skipped = $true
     }
 }
-Write-Host "update checks in progress"
 if (Test-Path "$profilePath\lastProfileUpdate.log") {
     $lastProfileUpdate = Get-Content -Path "$profilePath\lastProfileUpdate.log" -First 1
     $lastProfileUpdateDate = [datetime]::ParseExact($lastProfileUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
@@ -529,8 +521,6 @@ if (Test-Path "$profilePath\lastProfileUpdate.log") {
         $profile_update_skipped = $true
     }
 }
-Write-Host "update checks concluded"
-Write-Host $canConnectToGitHub
 if (-not $powershell_update_skipped) {
     Update-PowerShell
 }
