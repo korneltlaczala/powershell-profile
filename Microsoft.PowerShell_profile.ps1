@@ -508,7 +508,8 @@ if (Test-Path "$profilePath\lastPowershellUpdate.log") {
     $lastPowershellUpdateDate = [datetime]::ParseExact($lastPowershellUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
     $timeSinceLastPowershellUpdate = (Get-Date) - $lastPowershellUpdateDate
     if ($timeSinceLastPowershellUpdate.TotalHours -lt 24) {
-        Write-Host "Skipping powershell update check. Last update was $timeSinceLastPowershellUpdate ago." -ForegroundColor Yellow
+        $hoursRounded = [math]::Round($timeSinceLastPowershellUpdate.TotalHours, 2)
+        Write-Host ("Skipping PowerShell update check. Last update was {0} hours ago." -f $hoursRounded) -ForegroundColor Yellow
         $powershell_update_skipped = $true
     }
 }
@@ -517,7 +518,8 @@ if (Test-Path "$profilePath\lastProfileUpdate.log") {
     $lastProfileUpdateDate = [datetime]::ParseExact($lastProfileUpdate, 'dd/MM/yyyy HH:mm:ss', $null)
     $timeSinceLastProfileUpdate = (Get-Date) - $lastProfileUpdateDate
     if ($timeSinceLastProfileUpdate.TotalHours -lt 24) {
-        Write-Host "Skipping profile update check. Last update was $timeSinceLastProfileUpdate ago." -ForegroundColor Yellow
+        $hoursRounded = [math]::Round($timeSinceLastProfileUpdate.TotalHours, 2)
+        Write-Host ("Skipping profile update check. Last update was {0} hours ago." -f $hoursRounded) -ForegroundColor Yellow
         $profile_update_skipped = $true
     }
 }
