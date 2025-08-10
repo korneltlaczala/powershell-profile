@@ -311,6 +311,7 @@ function tail {
   Get-Content $Path -Tail $n -Wait:$f
 }
 
+
 # Quick File Creation
 function nf { param($name) New-Item -ItemType "file" -Path . -Name $name }
 
@@ -395,7 +396,7 @@ function Get-Theme {
             return
         }
     } else {
-        oh-my-posh init pwsh --config https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/cobalt2.omp.json | Invoke-Expression
+        oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\cobalt2.omp.json" | Invoke-Expression
     }
 }
 
@@ -501,7 +502,6 @@ pst - Retrieves text from the clipboard.
 Use 'Show-Help' to display this help message.
 "@
 }
-
 
 if (Test-Path "$profilePath\lastPowershellUpdate.log") {
     $lastPowershellUpdate = Get-Content -Path "$profilePath\lastPowershellUpdate.log" -First 1
