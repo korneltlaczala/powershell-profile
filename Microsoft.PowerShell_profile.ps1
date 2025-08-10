@@ -523,12 +523,12 @@ if (Test-Path "$profilePath\lastProfileUpdate.log") {
         $profile_update_skipped = $true
     }
 }
-if (-not $powershell_update_skipped) {
-    Update-PowerShell
-}
-if (-not $profile_update_skipped) {
-    Update-Profile
-}
+# if (-not $powershell_update_skipped) {
+#     Update-PowerShell
+# }
+# if (-not $profile_update_skipped) {
+#     Update-Profile
+# }
 Write-Host "----------------------------------------"
 Write-Host "Use 'Show-Help' to display help"
 Write-Host "----------------------------------------"
