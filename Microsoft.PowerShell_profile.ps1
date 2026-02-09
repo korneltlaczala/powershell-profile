@@ -25,8 +25,9 @@ $successColor = "Green"
 
 $profilePath = Split-Path -Path $PROFILE
 # Initial GitHub.com connectivity check with 1 second timeout
-$canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
+# $canConnectToGitHub = Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
 # Internet connection could be lost, so we need to check it every time we need to connect to GitHub, we need a function for that
+
 function Test-GitHubConnection {
     return Test-Connection github.com -Count 1 -Quiet -TimeoutSeconds 1
 }
@@ -72,7 +73,9 @@ if (Test-Path($ChocolateyProfile)) {
 # Check for Profile Updates
 function Update-Profile {
 
-    if (-not $global:canConnectToGitHub) {
+    
+    $canconnectToGitHub = Test-GitHubConnection
+    if (-not $canconnectToGitHub) {
         Write-Host "Skipping profile update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
         return
     }
@@ -110,7 +113,9 @@ function Update-Profile {
 }
 
 function Update-PowerShell {
-    if (-not $global:canConnectToGitHub) {
+
+    $canConnectToGitHub = Test-GitHubConnection
+    if (-not $canconnectToGitHub) {
         Write-Host "Skipping PowerShell update check due to GitHub.com not responding within 1 second." -ForegroundColor Yellow
         return
     }
